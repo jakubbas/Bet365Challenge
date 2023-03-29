@@ -35,6 +35,9 @@ public class LerpDataTest : MonoBehaviour
 
     }
 
+
+
+
     public float Remap(float from, float fromMin, float fromMax, float toMin, float toMax)
     {
         var fromAbs = from - fromMin;
@@ -53,10 +56,6 @@ public class LerpDataTest : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
-        //Vector2.Lerp(new Vector2(posX, posY), endX, endY, Time.deltaTime);
-    }
 
 
 
