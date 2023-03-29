@@ -50,7 +50,7 @@ public class HorseDataLoader : MonoBehaviour
     private void Update()
     {
         HorseData data = LoadData(dataReader);
-        if (data.I.Substring(14) != null)
+        if (data != null)
         {
             int horseID = int.Parse(data.I.Substring(14));
             Debug.Log("Horse ID: " + horseID);
@@ -61,10 +61,13 @@ public class HorseDataLoader : MonoBehaviour
     public static HorseData LoadData(StreamReader data)
     {
         string readData = data.ReadLine();
-        //Debug.Log(readData);
-        //readData = JsonUtility.ToJson(readData);
+
         HorseData currentLoaded = JsonUtility.FromJson <HorseData>(readData);
 
+        if (currentLoaded.K == 5 || currentLoaded == null)
+        {
+            return null;
+        }
 
         return currentLoaded;
     }
