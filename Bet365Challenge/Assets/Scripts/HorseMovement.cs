@@ -15,9 +15,18 @@ public class HorseMovement : MonoBehaviour
 
     private float maxDistance;
 
+    private float currentDis;
+
+
     private void Update()
     {
 
+    }
+
+
+    void MoveHorse()
+    {
+        transform.position = new Vector3(currentDis, transform.position.y, transform.position.z);
     }
 
 
@@ -25,19 +34,17 @@ public class HorseMovement : MonoBehaviour
     {
 
         Debug.Log(Remap(500f, 0, 1441.1f, 0, 100));
-
-
+        
         vectorStartConst = GetVector2Coordinate(startXConst, startYConst);
         vectorEndConst = GetVector2Coordinate(endXConst, endYConst);
         maxDistance = Vector2.Distance(vectorStartConst, vectorEndConst);
-
-
-        PassInHorseData(0, -2.1494445, 52.6032730, 50f);
+        //PassInHorseData(0, -2.1494445, 52.6032730, 50f);
     }
 
-    public void PassInHorseData(int horseID, double xPos, double yPos, float currentDistance)
+    public void PassInHorseData(float currentDistance)
     {
-
+        currentDis = Remap(currentDistance, 0, 1441.1f, 100, 0);
+        MoveHorse();
 
         //currentPos = GetVector2Coordinate(-xPos, yPos);
         //float currentDistance = Vector2.Distance(currentPos, vectorEndConst);
