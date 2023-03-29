@@ -26,7 +26,7 @@ public class HorseMovement : MonoBehaviour
 
     void MoveHorse()
     {
-        transform.position = new Vector3(currentDis, transform.position.y, transform.position.z);
+        transform.position = new Vector3(-currentDis, transform.position.y, transform.position.z);
     }
 
 

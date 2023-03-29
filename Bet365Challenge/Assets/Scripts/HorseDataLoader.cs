@@ -25,12 +25,6 @@ public class HorseData
     public float SF;
 }
 
-struct dataNeeded
-{
-    public int ID;
-    public float distanceToEnd;
-}
-
 public class HorseDataLoader : MonoBehaviour
 {
 
@@ -60,15 +54,21 @@ public class HorseDataLoader : MonoBehaviour
 
     public static HorseData LoadData(StreamReader data)
     {
-        string readData = data.ReadLine();
+        HorseData currentLoaded;
 
-        HorseData currentLoaded = JsonUtility.FromJson <HorseData>(readData);
-
-        if (currentLoaded.K == 5 || currentLoaded == null)
+        while (true)
         {
-            return null;
-        }
+            string readData = data.ReadLine();
+            if (readData != "")
+            {
+                currentLoaded = JsonUtility.FromJson<HorseData>(readData);
 
+                if (currentLoaded.K != 5)
+                {
+                    break;
+                }
+            }
+        }
         return currentLoaded;
     }
 }
