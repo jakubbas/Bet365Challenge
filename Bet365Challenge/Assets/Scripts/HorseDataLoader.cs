@@ -25,20 +25,20 @@ public class HorseData
     public float SF;
 }
 
+struct dataNeeded
+{
+    public int ID;
+    public float distanceToEnd;
+}
 
 public class HorseDataLoader : MonoBehaviour
 {
-    struct dataNeeded
-    {
-        int ID;
-        double posX, posY;
-        float distanceToEnd;
-    }
 
 
 
     FileInfo raceData;
     StreamReader dataReader = null;
+    public GameObject[] Horses;
 
     private void Start()
     {
@@ -50,8 +50,12 @@ public class HorseDataLoader : MonoBehaviour
     private void Update()
     {
         HorseData data = LoadData(dataReader);
-        if (data != null)
-        Debug.Log(data.K + " | " + data.T + " | " + data.I + " | " + data.X + " | " + data.Y + " | " + data.V + " | " + data.P + " | " + data.SF);
+        if (data.I.Substring(14) != null)
+        {
+            int horseID = int.Parse(data.I.Substring(14));
+            Debug.Log("Horse ID: " + horseID);
+            Horses[horseID - 1].GetComponent<HorseMovement>().PassInHorseData(data.P);
+        }
     }
 
     public static HorseData LoadData(StreamReader data)
@@ -60,6 +64,7 @@ public class HorseDataLoader : MonoBehaviour
         //Debug.Log(readData);
         //readData = JsonUtility.ToJson(readData);
         HorseData currentLoaded = JsonUtility.FromJson <HorseData>(readData);
+
 
         return currentLoaded;
     }
